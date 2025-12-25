@@ -1,15 +1,23 @@
-Welcome to your new dbt project!
-
-### Using the starter project
-
-Try running the following commands:
-- dbt run
-- dbt test
 
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+# Arquitectura
+
+## Diseño arquitectura
+
+A continuación se detalla el diseño de las arquitecturas para cumplir los requerimientos de:
+-  Diseñar una arquitectura de datos donde se visualice qué tecnologías o herramientas se deben articular para que los logs de SmallB y SmallC se logren integrar con el sistema de datos de BigA.
+
+### 1.1. Arquitectura patrón de ingesta en bulk para los datos históricos
+
+
+### 1.2. Arquitectura patrón de ingesta en streaming
+
+
+## Análisis costos
+
+## Modelo de datos y consultas
+
+## Absorción arquitectura
+
+
+# Analítica
