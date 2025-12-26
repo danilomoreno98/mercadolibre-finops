@@ -16,7 +16,7 @@ YEAR = "{{ data_interval_start.year }}"
 MONTH = "{{ '%02d' | format(data_interval_start.month) }}"
 DAY = "{{ '%02d' | format(data_interval_start.day) }}"
 
-S3_BUCKET_NAME = "mi-bucket-finops"
+S3_BUCKET_NAME = "bucket_bronze"
 
 # Vars Datasync
 DATASYNC_TASK_ARNS: List[str] = [
