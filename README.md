@@ -167,14 +167,13 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 
 ## Silver — mínimo necesario (1 tabla por empresa, partición por hora)
 
-> Partición recomendada: event_date, event_hour (derivados de event_timestamp)
+> Partición recomendada: Hidden partition Iceberg hour(event_timestamp)
 
 ### silver.biga_energy_readings
 | Columna | Tipo |
 |--------|------|
 | event_timestamp | timestamp |
 | event_date | date |
-| event_hour | int |
 | customer_id | string |
 | consumption_kwh | double |
 | revenue_usd | double |
@@ -185,7 +184,6 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 |--------|------|
 | event_timestamp | timestamp |
 | event_date | date |
-| event_hour | int |
 | customer_id | string |
 | consumption_kwh | double |
 | revenue_usd | double |
@@ -196,7 +194,6 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 |--------|------|
 | event_timestamp | timestamp |
 | event_date | date |
-| event_hour | int |
 | customer_id | string |
 | consumption_kwh | double |
 | revenue_usd | double |
@@ -213,7 +210,6 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 |--------|------|
 | event_timestamp | timestamp |
 | event_date | date |
-| event_hour | int |
 | company_id | string |
 | customer_id | string |
 | consumption_kwh | double |
