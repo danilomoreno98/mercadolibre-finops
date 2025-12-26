@@ -7,6 +7,7 @@ from airflow.utils.task_group import TaskGroup
 from airflow.providers.amazon.aws.operators.datasync import DataSyncOperator
 from airflow.providers.amazon.aws.sensors.s3 import S3KeySensor
 from airflow.providers.amazon.aws.operators.ecs import EcsRunTaskOperator
+from airflow.providers.amazon.aws.operators.glue_crawler import GlueCrawlerOperator
 from airflow.operators.empty import EmptyOperator
 
 
@@ -28,6 +29,11 @@ S3_FINOPS_PREFIXS: List[str] = [
     f"finops/smallB/year={YEAR}/month={MONTH}/day={DAY}/*.csv",
     f"finops/smallC/year={YEAR}/month={MONTH}/day={DAY}/*.csv",
 ]
+
+# Vars Glue Crawler
+GLUE_CRAWLER_NAME = "finops-crawler"
+GLUE_CRAWLER_ROLE = "arn:aws:iam::123456789012:role/AWSGlueServiceRole"
+GLUE_DATABASE_NAME = "finops_db"
 
 
 
@@ -69,7 +75,26 @@ def workflow():
             )
             .expand(bucket_key=S3_FINOPS_PREFIXS)
         )
-        ingest_datasync >> sensor_raw_files_finops
+        
+        glue_crawler = GlueCrawlerOperator(
+            task_id="glue_crawler",
+            aws_conn_id="aws_default",
+            config={
+                "Name": GLUE_CRAWLER_NAME,
+                "Role": GLUE_CRAWLER_ROLE,
+                "DatabaseName": GLUE_DATABASE_NAME,
+                "Targets": {
+                    "S3Targets": [
+                        {"Path": f"s3://{S3_BUCKET_NAME}/finops/smallB/"},
+                        {"Path": f"s3://{S3_BUCKET_NAME}/finops/smallC/"},
+                    ]
+                },
+            },
+            region_name="us-east-1",
+            wait_for_completion=True,
+        )
+        
+        ingest_datasync >> sensor_raw_files_finops >> glue_crawler
 
     
     with TaskGroup(group_id="datamodel_g_tasks") as datamodel_g_tasks:

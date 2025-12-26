@@ -279,3 +279,4 @@ LIMIT 1;
 
 ## Pipeline (DAG Airflow)
 
+![DAG analitica](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/DAG_analitica.png?raw=true)
