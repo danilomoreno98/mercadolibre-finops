@@ -287,3 +287,50 @@ El DAG diario orquesta la ingesta de datos FinOps desde AWS DataSync hacia S3 y 
 - **Actualización incremental con Iceberg**: Gracias al uso de Apache Iceberg con la estrategia merge, llave única y condición de actualización (`update_condition='src.upload_at > target.upload_at'`), se asegura reflejar siempre los datos más recientes. Esto es especialmente importante considerando que los registros de un mes pueden cambiar durante los primeros 15 días del mes siguiente (ej: datos de enero pueden actualizarse hasta el 15 de febrero), garantizando que las consultas siempre reflejen la información más actualizada.
 
 ![DAG analitica](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/DAG_analitica.png?raw=true)
+
+## ¿Cómo ha evolucionado el costo total mes a mes?
+## ¿Cuáles son los servicios con mayor crecimiento en los últimos 7 días?
+## ¿Qué tres servicios en la nube tienen los mayores costos por proveedor?
+
+![Tableau_1](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/Tableau_1.png?raw=true)
+
+
+## ¿Puedes agrupar servicios para mostrar la evolución de categorías similares entre proveedores? (Por ejemplo, evolución de servicios de almacenamiento, cómputo y red).
+
+![Tableau_2](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/Tableau_2.png?raw=true)
+
+## Si tuvieras que formular una estrategia para reducir costos en uno o más servicios, ¿cuál sería?
+
+Basándome en los datos disponibles en `fact_billing_cloud` y las categorías de servicios en `dim_services`, una estrategia efectiva de reducción de costos seguiría este enfoque:
+
+### 1. Identificación y priorización (Quick Wins)
+- **Análisis de Pareto**: Identificar el 20% de servicios que representan el 80% de los costos totales usando `fact_billing_cloud`
+- **Servicios huérfanos**: Detectar servicios con costos pero sin uso reciente (comparando `usage_amount` vs `cost_usd`)
+- **Crecimiento anómalo**: Identificar servicios con mayor crecimiento porcentual en los últimos 7-30 días
+
+### 2. Optimización por categoría
+
+**Cómputo (Cloud Run, EC2, Compute Engine)**:
+- Right-sizing: Analizar métricas de uso (`usage_amount`) vs costo para identificar instancias sobre-dimensionadas
+- Reservas/Committed Use Discounts: Para cargas de trabajo predecibles
+- Spot/Preemptible instances: Para cargas tolerantes a interrupciones
+- Consolidación: Identificar aplicaciones con bajo uso que pueden compartir recursos
+
+**Almacenamiento (Glacier, Cloud Storage)**:
+- Lifecycle policies: Mover datos antiguos a tiers más económicos automáticamente
+- Compresión y deduplicación: Reducir el volumen de datos almacenados
+- Eliminación de datos obsoletos: Identificar buckets/tablas sin acceso reciente
+
+**Base de datos y Analítica**:
+- Query optimization: Identificar queries costosas mediante análisis de uso
+- Retención de datos: Reducir períodos de retención donde sea posible
+- Compresión de datos: Implementar compresión.
+
+### 3. Comparación multi-proveedor
+- **Benchmarking**: Comparar costos por categoría entre AWS, GCP y OCI usando `provider` y `service_code`
+- **Migration opportunities**: Identificar servicios donde cambiar de proveedor pueda generar ahorros significativos
+
+### 4. Monitoreo y gobernanza continua
+- **Alertas de costo**: Configurar alertas cuando servicios excedan umbrales definidos
+- **Tagging y accountability**: Asegurar que todas las aplicaciones (`application`) estén correctamente etiquetadas para atribución de costos
+- **Dashboards**: Crear vistas agregadas por `billing_entity`, `application` y `categoria` para facilitar la toma de decisiones.
