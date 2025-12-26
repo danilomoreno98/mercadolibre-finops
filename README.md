@@ -57,8 +57,111 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 - Bucket silver (asumiendo compresión 5x)
     - Costo total = ~9k
 
-- Bucket gold (asumiendo compresión 5 y 10% de raw)
+- Bucket gold (asumiendo compresión 5x y 10% de raw)
     - Costo total = ~1k
+
+### SmallB
+
+- Bucket bronze (raw sin comprimir)
+    - Logs/día = 10.000 × 288 = 2.880.000 logs/día
+    - Logs/mes = 2.880.000 × 30 = 86.400.000 logs/mes
+    - Records/segundo = 10.000 / 300 = 33,33 records/s
+    - GB/s = 33,33 × 3 / 1.048.576 = 0,00009537 GB/s
+    - GB/mes = 0,00009537 × 2.592.000 = 247,6 GB/mes
+    - (0 – 51.200 GB) = 247,6 GB × 0,023 = 5,69 USD
+    - Costo total = ~5,7 USD/mes
+
+- SQS
+    - Mensajes/mes = 86,4M
+    - Requests aprox 3 por mensaje (send/receive/delete) = 86,4M × 3 = 259,2M requests/mes
+    - Requests cobrados ≈ 258,2M
+    - Costo = 0,4 USD por 1M requests
+    - Costo total = ~103,28 USD/mes
+
+- ECS
+    - Records/segundo = 33,33 records/s
+    - 1 task es suficiente
+    - Task 24/7 = 41,94 USD/mes
+    - Costo total = ~42 USD/mes
+
+- Kinesis Data Streams (~3 KB cada record)
+    - Records/segundo = 33,33 records/s
+    - GB/s = 33,33 × 3 / 1.048.576 = 0,00009537 GB/s
+    - GB/mes = 0,00009537 × 2.592.000 = 247,6 GB/mes
+    - Costo Data In = 247,6 × 0,032 = 7,92 USD
+    - Costo Out = 247,6 × 0,016 = 3,96 USD
+    - Costo total = ~11,9 USD/mes
+
+- Amazon Managed Service for Apache Flink (~3 KB cada record)
+    - Records/segundo = 33,33 records/s
+    - KPUs = 33,33 / 1.000 → 1 KPU
+    - Horas / mes = 720 h
+    - Costo compute KPU = 1 × 720 × 0,11 = 79,2 USD
+    - Running storage = 50 GB × 0,10 = 5,0 USD
+    - 1 KPU adicional fijo = 1 × 720 × 0,11 = 79,2 USD
+    - Costo total = ~163,4 USD/mes
+
+- Bucket silver (Parquet, compresión 5×)
+    - GB/mes = 247,6 / 5 = 49,5 GB
+    - 49,5 GB × 0,023 = 1,14 USD
+    - Costo total = ~1,1 USD/mes
+
+- Bucket gold (Parquet, compresión 5× y 10% de raw)
+    - GB/mes = (247,6 × 0,10) / 5 = 4,95 GB
+    - 4,95 GB × 0,023 = 0,11 USD
+    - Costo total = ~0,1 USD/mes
+
+### SmallC
+
+- Bucket bronze (raw sin comprimir)
+    - Logs/día = 80.000 × 288 = 23.040.000 logs/día
+    - Logs/mes = 23.040.000 × 30 = 691.200.000 logs/mes
+    - Records/segundo = 80.000 / 300 = 266,67 records/s
+    - GB/s = 266,67 × 3 / 1.048.576 = 0,00076294 GB/s
+    - GB/mes = 0,00076294 × 2.592.000 = 1.977,54 GB/mes
+    - (0 – 51.200 GB) = 1.977,54 GB × 0,023 = 45,48 USD
+    - Costo total = ~45,5 USD/mes
+
+- SQS
+    - Mensajes/mes = 691,2M
+    - Requests aprox 3 por mensaje (send/receive/delete) = 691,2M × 3 = 2.073,6M requests/mes
+    - Requests cobrados ≈ 2.072,6M
+    - Costo = 0,4 USD por 1M requests
+    - Costo total = ~829,04 USD/mes
+
+- ECS
+    - Records/segundo = 266,67 records/s
+    - 1 task es suficiente
+    - Task 24/7 = 41,94 USD/mes
+    - Costo total = ~42 USD/mes
+
+- Kinesis Data Streams (~3 KB cada record)
+    - Records/segundo = 266,67 records/s
+    - GB/s = 266,67 × 3 / 1.048.576 = 0,00076294 GB/s
+    - GB/mes = 0,00076294 × 2.592.000 = 1.977,54 GB/mes
+    - Costo Data In = 1.977,54 × 0,032 = 63,28 USD
+    - Costo Out = 1.977,54 × 0,016 = 31,64 USD
+    - Costo total = ~94,9 USD/mes
+
+- Amazon Managed Service for Apache Flink (~3 KB cada record)
+    - Records/segundo = 266,67 records/s
+    - KPUs = 266,67 / 1.000 → 1 KPU
+    - Horas / mes = 720 h
+    - Costo compute KPU = 1 × 720 × 0,11 = 79,2 USD
+    - Running storage = 50 GB × 0,10 = 5,0 USD
+    - 1 KPU adicional fijo = 1 × 720 × 0,11 = 79,2 USD
+    - Costo total = ~163,4 USD/mes
+
+- Bucket silver (Parquet, compresión 5×)
+    - GB/mes = 1.977,54 / 5 = 395,51 GB
+    - 395,51 GB × 0,023 = 9,10 USD
+    - Costo total = ~9,1 USD/mes
+
+- Bucket gold (Parquet, compresión 5× y 10% de raw)
+    - GB/mes = (1.977,54 × 0,10) / 5 = 39,55 GB
+    - 39,55 GB × 0,023 = 0,91 USD
+    - Costo total = ~0,9 USD/mes
+
 
 ## Modelo de datos y consultas
 
