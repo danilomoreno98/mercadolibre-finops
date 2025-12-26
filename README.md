@@ -165,49 +165,112 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 
 ## Modelo de datos y consultas
 
-### Silver (curada, por empresa)
-- silver_biga_events
-    - event_date (date)
-    - event_ts (timestamp)
-    - user_id (string)
-    - service (string)
-    - units (double)
-    - cost_usd (double)
-    - revenue_usd (double)
-    - source (string)  -- opcional: bigA/smallB/smallC
-    - (partition: event_date)
+## Silver — mínimo necesario (1 tabla por empresa, partición por hora)
 
-- silver_smallb_events
-    - mismas columnas y partición
+> Partición recomendada: event_date, event_hour (derivados de event_timestamp)
 
-- silver_smallc_events
-    - mismas columnas y partición
+### silver.biga_energy_readings
+| Columna | Tipo |
+|--------|------|
+| event_timestamp | timestamp |
+| event_date | date |
+| event_hour | int |
+| customer_id | string |
+| consumption_kwh | double |
+| revenue_usd | double |
+| cost_usd | double |
 
-> Nota: Mantener el MISMO esquema en las 3 tablas es clave para poder unirlas luego.
+### silver.smallb_energy_readings
+| Columna | Tipo |
+|--------|------|
+| event_timestamp | timestamp |
+| event_date | date |
+| event_hour | int |
+| customer_id | string |
+| consumption_kwh | double |
+| revenue_usd | double |
+| cost_usd | double |
 
-### Gold (modelo para usuarios: dimensiones + fact + agregados)
-- dim_company
-    - company_id
-    - company_name
-    - acquisition_date
-    - region
-    - industry
+### silver.smallc_energy_readings
+| Columna | Tipo |
+|--------|------|
+| event_timestamp | timestamp |
+| event_date | date |
+| event_hour | int |
+| customer_id | string |
+| consumption_kwh | double |
+| revenue_usd | double |
+| cost_usd | double |
 
-- dim_user
-    - user_id
-    - company_id
-    - user_type
+---
 
-- fact_consumption (unificada)
-    - event_date
-    - event_ts
-    - company_id
-    - user_id
-    - service
-    - units
-    - cost_usd
-    - revenue_usd
-    - source
+## Gold — mínimo necesario (conformado para analítica)
+
+> Partición recomendada: event_date, event_hour
+
+### gold.fact_energy_consumption
+| Columna | Tipo |
+|--------|------|
+| event_timestamp | timestamp |
+| event_date | date |
+| event_hour | int |
+| company_id | string |
+| customer_id | string |
+| consumption_kwh | double |
+| revenue_usd | double |
+| cost_usd | double |
+
+### gold.dim_company
+| Columna | Tipo |
+|--------|------|
+| company_id | string |
+| company_name | string |
+
+
+### Query 1 — Tercer mayor consumo en cada empresa
+
+```sql
+WITH customer_consumption AS (
+  SELECT
+    company_id,
+    customer_id,
+    SUM(consumption_kwh) AS total_consumption_kwh
+  FROM gold.fact_energy_consumption
+  GROUP BY company_id, customer_id
+),
+ranked AS (
+  SELECT
+    company_id,
+    customer_id,
+    total_consumption_kwh,
+    ROW_NUMBER() OVER (
+      PARTITION BY company_id
+      ORDER BY total_consumption_kwh DESC
+    ) AS rn
+  FROM customer_consumption
+)
+SELECT
+  company_id,
+  customer_id,
+  total_consumption_kwh AS third_highest_consumption_kwh
+FROM ranked
+WHERE rn = 3;
+```
+
+### Query — Empresa adquirida más rentable
+
+```sql
+SELECT
+  company_id,
+  SUM(revenue_usd) AS total_revenue_usd,
+  SUM(cost_usd) AS total_cost_usd,
+  SUM(revenue_usd) - SUM(cost_usd) AS profit_usd
+FROM gold.fact_energy_consumption
+WHERE company_id IN ('SmallB', 'SmallC')
+GROUP BY company_id
+ORDER BY profit_usd DESC
+LIMIT 1;
+```
 
 ## Absorción arquitectura
 
