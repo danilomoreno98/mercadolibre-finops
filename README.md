@@ -203,7 +203,7 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 
 ## Gold — mínimo necesario (conformado para analítica)
 
-> Partición recomendada: event_date, event_hour
+> Partición recomendada: Hidden partition Iceberg hour(event_timestamp)
 
 ### gold.fact_energy_consumption
 | Columna | Tipo |
@@ -272,3 +272,10 @@ LIMIT 1;
 
 
 # Analítica
+
+## Arquitectura
+
+![Arquitectura analitica](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/Arq_analitica.png?raw=true)
+
+## Pipeline (DAG Airflow)
+
