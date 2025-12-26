@@ -165,6 +165,50 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 
 ## Modelo de datos y consultas
 
+### Silver (curada, por empresa)
+- silver_biga_events
+    - event_date (date)
+    - event_ts (timestamp)
+    - user_id (string)
+    - service (string)
+    - units (double)
+    - cost_usd (double)
+    - revenue_usd (double)
+    - source (string)  -- opcional: bigA/smallB/smallC
+    - (partition: event_date)
+
+- silver_smallb_events
+    - mismas columnas y partición
+
+- silver_smallc_events
+    - mismas columnas y partición
+
+> Nota: Mantener el MISMO esquema en las 3 tablas es clave para poder unirlas luego.
+
+### Gold (modelo para usuarios: dimensiones + fact + agregados)
+- dim_company
+    - company_id
+    - company_name
+    - acquisition_date
+    - region
+    - industry
+
+- dim_user
+    - user_id
+    - company_id
+    - user_type
+
+- fact_consumption (unificada)
+    - event_date
+    - event_ts
+    - company_id
+    - user_id
+    - service
+    - units
+    - cost_usd
+    - revenue_usd
+    - source
+
 ## Absorción arquitectura
 
 
