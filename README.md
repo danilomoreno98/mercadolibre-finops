@@ -16,6 +16,13 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 
 ## Análisis costos
 
+### BigA
+- SQS:
+    - Costo region us-east-1, $0,4 (From 1 Million to 100 Billion Requests/Month)
+    - Archivos/mes: 400.000 × 30 = 12.000.000
+    - Requests aprox: 3 por archivo (send/receive/delete) ⇒ 36.000.000 requests/mes
+    - Costo SQS ≈ $14,4/mes
+
 ## Modelo de datos y consultas
 
 ## Absorción arquitectura
