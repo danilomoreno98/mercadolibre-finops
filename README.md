@@ -14,6 +14,9 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
 
 ![Arquitectura streaming](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/Arq_streaming.png?raw=true)
 
+Esta arquitectura de streaming está diseñada para ser lo más near-real time posible. Además, logra identificar trazas que puedan ser repetidas y manejar satisfactoriamente este escenario gracias a la deduplicación de Apache Iceberg con llave única, la solución tiene la capacidad de estandarizar un formato estandar para integrar con el esquema de BigA y no solo eso, si es necesario puede evolucionar sin problemas (añadir columnas o cambiar tipo de dato).
+
+
 ## Análisis costos
 
 ### BigA
