@@ -288,18 +288,22 @@ El DAG diario orquesta la ingesta de datos FinOps desde AWS DataSync hacia S3 y 
 
 ![DAG analitica](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/DAG_analitica.png?raw=true)
 
-## ¿Cómo ha evolucionado el costo total mes a mes?
-## ¿Cuáles son los servicios con mayor crecimiento en los últimos 7 días?
-## ¿Qué tres servicios en la nube tienen los mayores costos por proveedor?
+## Tablero Tableau
+
+- ¿Cómo ha evolucionado el costo total mes a mes?
+- ¿Cuáles son los servicios con mayor crecimiento en los últimos 7 días?
+- ¿Qué tres servicios en la nube tienen los mayores costos por proveedor?
 
 ![Tableau_1](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/Tableau_1.png?raw=true)
 
 
-## ¿Puedes agrupar servicios para mostrar la evolución de categorías similares entre proveedores? (Por ejemplo, evolución de servicios de almacenamiento, cómputo y red).
+- ¿Puedes agrupar servicios para mostrar la evolución de categorías similares entre proveedores? (Por ejemplo, evolución de servicios de almacenamiento, cómputo y red). 
+
+Para llevar a cabo este análisis, se creó una semilla (`dim_services`) con la dimensión de categoría de servicios que mapea códigos de servicios de nube (AWS, GCP, OCI) a sus categorías correspondientes. La semilla se encuentra en [`data_models_finops/seeds/dim_services.csv`](data_models_finops/seeds/dim_services.csv) y permite enriquecer la tabla de facturación para realizar análisis agrupados por categoría.
 
 ![Tableau_2](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/Tableau_2.png?raw=true)
 
-## Si tuvieras que formular una estrategia para reducir costos en uno o más servicios, ¿cuál sería?
+- Si tuvieras que formular una estrategia para reducir costos en uno o más servicios, ¿cuál sería?
 
 Basándome en los datos disponibles en `fact_billing_cloud` y las categorías de servicios en `dim_services`, una estrategia efectiva de reducción de costos seguiría este enfoque:
 
