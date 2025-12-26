@@ -31,6 +31,13 @@ Diseñar una arquitectura de datos donde se visualice qué tecnologías o herram
     - Costo en region us-east-1 (From 1 Million to 100 Billion Requests/Month) = 0,4 USD
     - Costo total = ~ $14,4/mes
 
+- ECS:
+    - Archivos/día = 400.000 / 86.400 = ~5 files/s
+    - Task 24/7 = $41,94 / mes
+    - Tiempo por archivo = ~10s
+    - Tareas concurrentes = 5 x 10 = 50
+    - Costo total = 50 x 41,94 = ~2k USD
+
 - Kinesis Data Streams (~3Kb cada record)
     - Records/segundo = 25B/86400 = 289.352 records/s
     - GB/s = 389.352 x 3 / 1048576 = 0,828 GB/s
