@@ -1,0 +1,188 @@
+service_code,categoria
+LOGGING,DevOps/Tools
+NETWORK,Red
+TELEMETRY,Desarrollo
+Cloud Logging,DevOps/Tools
+Cloud Composer,Desarrollo
+Cloud Run,Cómputo
+Cloud Bigtable,Base de datos
+Cloud AutoML,IA/ML
+Cloud Machine Learning Engine,IA/ML
+Stackdriver Trace,DevOps/Tools
+Networking,Red
+Data Catalog,Desarrollo
+BigQuery Data Transfer Service,Analítica
+Firebase Realtime Database,Base de datos
+Google Click to Deploy Deep Learning VM,Desarrollo
+Container Registry Vulnerability Scanning,IA/ML
+Quantum Metric,Desarrollo
+AmazonWorkDocs,Desarrollo
+AWSShield,Seguridad
+AWSGlue,Analítica
+AWSDirectConnect,Red
+AWSEvents,APIs/Integración
+AmazonAthena,Analítica
+AmazonEFS,Almacenamiento
+AmazonGlacier,Almacenamiento
+AWSGlobalAccelerator,Red
+AmazonTimestream,Desarrollo
+AmazonMQ,APIs/Integración
+AmazonGrafana,Desarrollo
+AWSIoT,IoT
+AmazonForecast,IA/ML
+AWSDataTransfer,Desarrollo
+AmazonInspector,Seguridad
+5psbo41gsi6bj9kuph1af7d7hp,otros
+dno0w605c6hq7ro566ugw0qya,otros
+AmazonElastiCache,Desarrollo
+2wqkpek696qhdeo7lbbjncqli,otros
+AmazonS3GlacierDeepArchive,Almacenamiento
+AmazonML,IA/ML
+wg46ptwda476sas8otff0ynk,otros
+Geocoding API,APIs/Integración
+AmazonDetective,Desarrollo
+DATABASE,Base de datos
+OBJECTSTORE,Almacenamiento
+BigQuery,Analítica
+Cloud Storage,Almacenamiento
+Source Repository,DevOps/Tools
+Maps API,APIs/Integración
+BigQuery Reservation API,Analítica
+Cloud CDN,Red
+Vertex AI,IA/ML
+Secret Manager,Desarrollo
+Cloud Data Loss Prevention,Desarrollo
+Cloud Data Fusion,Analítica
+Cloud Document AI API,IA/ML
+Notebooks,Cómputo
+Maps Static API,APIs/Integración
+Network,Red
+AmazonRoute53,Red
+AmazonKinesis,Desarrollo
+AmazonMacie,Seguridad
+AWSSecurityHub,Seguridad
+AWSBackup,Almacenamiento
+CodeBuild,DevOps/Tools
+AWSStorageGateway,Almacenamiento
+AmazonKinesisAnalytics,Analítica
+AmazonFSx,Almacenamiento
+AmazonAppStream,Desarrollo
+AWSCostExplorer,DevOps/Tools
+AmazonS3,Almacenamiento
+AWSCodeArtifact,DevOps/Tools
+AmazonDocDB,Base de datos
+AWSQueueService,APIs/Integración
+AmazonEC2,Cómputo
+awskms,Seguridad
+AWSCloudTrail,IA/ML
+AWSCertificateManager,Desarrollo
+ComputeSavingsPlans,Desarrollo
+AWSCodePipeline,DevOps/Tools
+translate,IA/ML
+AmazonInspectorV2,Seguridad
+AmazonDAX,Desarrollo
+1elkus23vc76sp16eu1hrkrepc,otros
+aky5e8019p6esdi8w4nkwqv9s,otros
+AmazonRegistrar,otros
+BLOCK_STORAGE,Almacenamiento
+Compute Engine,Cómputo
+Cloud Pub/Sub,APIs/Integración
+Places API,APIs/Integración
+App Engine,Cómputo
+Cloud Vision API,IA/ML
+Cloud Key Management Service (KMS),Seguridad
+BigQuery Storage API,Almacenamiento
+Cloud Functions,Cómputo
+Cloud DNS,Red
+Time Zone API,APIs/Integración
+Support,DevOps/Tools
+Artifact Registry,Desarrollo
+Cloud Tasks,APIs/Integración
+Cloud Memorystore for Redis,Base de datos
+Web Risk,Desarrollo
+Delphix Corp Delphix Data Masking for Google Cloud (3TB),Desarrollo
+AmazonVPC,Red
+AmazonWorkSpaces,Desarrollo
+AmazonNeptune,Base de datos
+AmazonDynamoDB,Base de datos
+AWSLambda,Desarrollo
+AmazonLightsail,Cómputo
+AmazonDevOpsGuru,Desarrollo
+AmazonSimpleDB,Base de datos
+AWSTransfer,Desarrollo
+AmazonSageMaker,Desarrollo
+AmazonECS,Cómputo
+AmazonIVS,Desarrollo
+AmazonEKS,Cómputo
+AWSDatabaseMigrationSvc,Base de datos
+AWSNetworkFirewall,Red
+AWSBudgets,DevOps/Tools
+datapipeline,DevOps/Tools
+AmazonStates,APIs/Integración
+AmazonCognito,Desarrollo
+AmazonMSK,APIs/Integración
+AmazonCloudWatch,DevOps/Tools
+AmazonRekognition,IA/ML
+AmazonGuardDuty,Seguridad
+IoTDeviceManagement,IoT
+AWSServiceCatalog,Desarrollo
+AWSSecretsManager,Seguridad
+AmazonTextract,IA/ML
+AmazonPersonalize,IA/ML
+dztfbzx259beole7sf2qi7vmi,otros
+8gg94ykwjf42jjtgdt6oo1zxj,otros
+ek4qedjnb2fvu65fjvdvh2mta,otros
+AWSOutposts,otros
+AWSMigrationHubRefactorSpaces,Desarrollo
+COMPUTE,Cómputo
+VPN,Red
+MYSQL,Base de datos
+Cloud Dataflow,Analítica
+Stackdriver Monitoring,DevOps/Tools
+Cloud SQL,Base de datos
+reCAPTCHA Enterprise,Seguridad
+Kubernetes Engine,Cómputo
+Cloud Build,DevOps/Tools
+BigQuery BI Engine,Analítica
+Cloud Scheduler,APIs/Integración
+Translate,IA/ML
+Cloud Natural Language,Desarrollo
+VM Manager,Desarrollo
+Cloud Spanner,Base de datos
+Firebase Hosting,Desarrollo
+Invoice,Desarrollo
+Cloud Speech API,IA/ML
+Veeam Software Veeam Backup for Google Cloud Platform,Almacenamiento
+AmazonRDS,Base de datos
+ElasticMapReduce,Desarrollo
+AmazonRedshift,Analítica
+AmazonECR,Desarrollo
+AWSSystemsManager,Desarrollo
+AWSFMS,Desarrollo
+AmazonMemoryDB,Base de datos
+AWSAppSync,Desarrollo
+AmazonES,Desarrollo
+AmazonSES,Desarrollo
+AmazonApiGateway,APIs/Integración
+AmazonKinesisFirehose,Desarrollo
+AWSDirectoryService,Desarrollo
+OCBPremiumSupport,DevOps/Tools
+AmazonQuickSight,Desarrollo
+CloudHSM,Seguridad
+AWSConfig,DevOps/Tools
+AWSELB,Red
+AmazonCloudFront,Red
+AWSXRay,Desarrollo
+806j2of0qy5osgjjixq9gqc6g,otros
+awswaf,Seguridad
+adebs933j1m9ftrsoompzhb48,otros
+AmazonSNS,APIs/Integración
+9fmjj3b9hombuy4jawab1i13i,otros
+1qo0s5buqf6m1aoi9bi198bo9i,otros
+5jeqvo3rsibk9of7p0rvaofir,otros
+byvxqqtdoo1mjolps7vq7qrkq,otros
+OCBAWSDirectConnect,otros
+AWSCloudShell,otros
+AWSElementalMediaStore,otros
+AWSComputeOptimizer,Desarrollo
+

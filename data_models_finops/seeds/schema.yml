@@ -1,0 +1,38 @@
+version: 2
+
+seeds:
+  - name: dim_services
+    description: |
+      Dimensión de servicios que mapea códigos de servicios de nube (AWS, GCP, OCI) 
+      a sus categorías correspondientes. Utilizada para enriquecer la tabla de 
+      facturación con información de categorización de servicios.
+    
+    columns:
+      - name: service_code
+        description: |
+          Código o nombre del servicio de nube. Puede ser de AWS, GCP u OCI.
+          Ejemplos: 'AmazonEC2', 'Cloud Run', 'BigQuery', etc.
+        data_type: varchar
+        tests:
+          - not_null
+          - unique
+
+      - name: categoria
+        description: |
+          Categoría asignada al servicio. Categorías principales incluyen:
+          - Cómputo
+          - Almacenamiento
+          - Base de datos
+          - Red
+          - Analítica
+          - IA/ML
+          - Desarrollo
+          - DevOps/Tools
+          - Seguridad
+          - APIs/Integración
+          - IoT
+          - otros
+        data_type: varchar
+        tests:
+          - not_null
+

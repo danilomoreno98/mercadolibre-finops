@@ -42,3 +42,12 @@ models:
       +persist_docs:
         relation: true
         columns: true
+
+# Configuring seeds
+seeds:
+  data_models_finops:
+    dim_services:
+      +column_types:
+        service_code: varchar
+        categoria: varchar
+      +quote_columns: false
