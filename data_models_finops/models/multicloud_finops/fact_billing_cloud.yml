@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: fact_billing_cloud
+    description: |
+      Tabla de hechos que consolida la información de facturación y uso de recursos 
+      de múltiples proveedores de nube (AWS, GCP, OCI). Esta tabla permite realizar 
+      análisis de costos y uso de manera unificada across cloud providers.
+    
+    columns:
+      - name: usage_date
+        description: |
+          Fecha de uso del recurso. Corresponde a la fecha en que se consumió el servicio.
+          Para AWS: start_date, para GCP: usage_start_date, para OCI: intervalusagestart.
+        data_type: date
+
+      - name: provider
+        description: |
+          Proveedor de nube. Valores posibles: 'aws', 'gcp', 'oci'.
+          Identifica de qué proveedor proviene el registro de facturación.
+        data_type: varchar
+
+      - name: billing_entity
+        description: |
+          Entidad de facturación que identifica la cuenta/proyecto/tenant.
+          Para AWS: account_id, para GCP: project_id, para OCI: tenant_id.
+        data_type: varchar
+
+      - name: application
+        description: |
+          Aplicación o servicio asociado al recurso consumido.
+          Se obtiene de tags/labels del proveedor. Si no está disponible, se marca como 'UNKNOWN'.
+        data_type: varchar
+
+      - name: region
+        description: |
+          Región geográfica donde se ejecutó el recurso o servicio.
+          Para AWS: region, para GCP: location_region, para OCI: product_region.
+        data_type: varchar
+
+      - name: service_code
+        description: |
+          Código o nombre del servicio de nube consumido.
+          Para AWS: product_code, para GCP: service_description, para OCI: product_service.
+        data_type: varchar
+
+      - name: usage_type
+        description: |
+          Tipo de uso o SKU del servicio. Describe el tipo específico de recurso consumido.
+          Para AWS: usage_type, para GCP: sku_description, para OCI: product_description.
+        data_type: varchar
+
+      - name: usage_unit
+        description: |
+          Unidad de medida del uso (ej: GB, horas, requests, etc.).
+          Para OCI puede ser NULL si no está disponible.
+        data_type: varchar
+
+      - name: upload_at
+        description: |
+          Timestamp que indica cuándo se cargó el archivo de facturación al sistema.
+          Se obtiene del metadato $file_modified_time del archivo fuente.
+        data_type: timestamp
+
+      - name: usage_amount
+        description: |
+          Cantidad total de uso del recurso en la unidad especificada en usage_unit.
+          Para OCI puede ser NULL si no está disponible.
+        data_type: double
+
+      - name: cost_usd
+        description: |
+          Costo total en dólares estadounidenses (USD) del uso del recurso.
+          Para OCI se convierte de la moneda local dividiendo por 500 (tasa de cambio aproximada).
+        data_type: double
+
