@@ -276,12 +276,14 @@ LIMIT 1;
 
 ## Pipeline (DAG Airflow)
 
-El DAG diario orquesta la ingesta de datos FinOps desde AWS DataSync hacia S3 y ejecuta el datamodel (DBT) de FinOps en ECS Fargate con particionamiento YEAR/MONTH/DAY.
+El código del DAG se encuentra en: [`airflow/dags/MELI_FINOPS_DI.py`](airflow/dags/MELI_FINOPS_DI.py)
+
+El DAG diario orquesta la ingesta de datos FinOps desde AWS DataSync hacia S3 y ejecuta el datamodel (DBT) de FinOps en ECS Fargate con particionamiento hidden a nivel de día.
 
 **Características principales:**
 
 - **Diseño dinámico**: El DAG está diseñado con variables (`DATASYNC_TASK_ARNS`, `S3_FINOPS_PREFIXS`) que pueden ser configuradas como variables de Airflow, fortaleciendo la reutilización y facilitando añadir o quitar fuentes de datos sin modificar el código del DAG.
 
-- **Actualización incremental con Iceberg**: Gracias al uso de Apache Iceberg con la estrategia merge, llave única (`unique_key`) y condición de actualización (`update_condition='src.upload_at > target.upload_at'`), se asegura reflejar siempre los datos más recientes. Esto es especialmente importante considerando que los registros de un mes pueden cambiar durante los primeros 15 días del mes siguiente (ej: datos de enero pueden actualizarse hasta el 15 de febrero), garantizando que las consultas siempre reflejen la información más actualizada.
+- **Actualización incremental con Iceberg**: Gracias al uso de Apache Iceberg con la estrategia merge, llave única y condición de actualización (`update_condition='src.upload_at > target.upload_at'`), se asegura reflejar siempre los datos más recientes. Esto es especialmente importante considerando que los registros de un mes pueden cambiar durante los primeros 15 días del mes siguiente (ej: datos de enero pueden actualizarse hasta el 15 de febrero), garantizando que las consultas siempre reflejen la información más actualizada.
 
 ![DAG analitica](https://github.com/danilomoreno98/mercadolibre-finops/blob/main/media/DAG_analitica.png?raw=true)
